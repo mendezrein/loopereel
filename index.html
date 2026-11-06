@@ -18,9 +18,9 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%;background:radial-gradient(1200px 800px at 30% 20%,#f3f6fb 0%,var(--bg) 55%);color:var(--fg);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;overflow:hidden}
 body{position:fixed;inset:0;display:grid;place-items:center}
-.canvas{width:min(96vw,1180px);height:min(96vh,760px);border-radius:40px;background:var(--card);box-shadow:22px 22px 44px var(--shadow-dark),-22px -22px 44px var(--shadow-light);display:grid;grid-template-columns:1fr auto;gap:18px;padding:22px;align-items:center}
-.phone-wrap{display:grid;place-items:center;height:100%}
-.phone{position:relative;aspect-ratio:9/16;height:min(100%,680px);width:auto;max-width:100%;border-radius:34px;overflow:hidden;background:#000;box-shadow:inset 10px 10px 22px rgba(0,0,0,.35),inset -8px -8px 18px rgba(255,255,255,.08),14px 14px 30px var(--shadow-dark),-14px -14px 30px var(--shadow-light)}
+.canvas{position:relative;width:min(96vw,420px);height:min(96vh,748px);aspect-ratio:9/16;border-radius:40px;background:var(--card);box-shadow:22px 22px 44px var(--shadow-dark),-22px -22px 44px var(--shadow-light);padding:0;overflow:hidden}
+.phone-wrap{height:100%}
+.phone{position:relative;width:100%;height:100%;border-radius:40px;overflow:hidden;background:#000;box-shadow:inset 12px 12px 26px rgba(0,0,0,.4),inset -10px -10px 22px rgba(255,255,255,.06)}
 #clip{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#000}
 .grad{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,.35) 0,transparent 24%,transparent 60%,rgba(0,0,0,.78) 100%)}
 .topbar{position:absolute;top:12px;left:14px;right:14px;display:flex;justify-content:space-between;align-items:center;z-index:3;pointer-events:none;color:#fff}
@@ -38,13 +38,15 @@ body{position:fixed;inset:0;display:grid;place-items:center}
 .circle{width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.16);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.22);display:grid;place-items:center;box-shadow:0 8px 18px rgba(0,0,0,.25)}
 .circle svg{width:20px;height:20px;fill:currentColor}
 .label{font-size:10px;font-weight:600}
-.side{display:flex;flex-direction:column;gap:14px;align-items:center;justify-content:center;padding:8px}
+.side{position:absolute;left:10px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:10px;align-items:center;justify-content:center;padding:6px;z-index:4;pointer-events:none}
+.side .nbtn{pointer-events:auto}
 .nbtn{width:58px;height:58px;border-radius:50%;border:none;background:var(--card);color:var(--fg);display:grid;place-items:center;cursor:pointer;box-shadow:8px 8px 16px var(--shadow-dark),-8px -8px 16px var(--shadow-light);transition:all .15s ease}
 .nbtn:active{box-shadow:inset 6px 6px 12px var(--shadow-dark),inset -6px -6px 12px var(--shadow-light)}
 .nbtn svg{width:22px;height:22px;fill:currentColor}
 .ncount{font-size:11px;font-weight:700;color:var(--muted)}
 .nlabel{font-size:10px;color:var(--muted)}
-.toolbar{grid-column:1/-1;display:flex;gap:14px;justify-content:center;align-items:center;flex-wrap:wrap}
+.toolbar{position:absolute;left:50%;bottom:8px;transform:translateX(-50%);display:flex;gap:8px;justify-content:center;align-items:center;flex-wrap:wrap;z-index:4;max-width:96%;pointer-events:auto}
+.toolbar .tbtn{padding:7px 11px;font-size:11px}
 .tbtn{border:none;border-radius:16px;padding:10px 16px;background:var(--card);color:var(--fg);font-weight:600;font-size:12px;cursor:pointer;box-shadow:6px 6px 12px var(--shadow-dark),-6px -6px 12px var(--shadow-light);display:flex;align-items:center;gap:8px}
 .tbtn:active{box-shadow:inset 5px 5px 10px var(--shadow-dark),inset -5px -5px 10px var(--shadow-light)}
 .hint{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:4;pointer-events:none;background:rgba(255,255,255,.7);color:var(--fg);border-radius:16px;padding:12px 16px;text-align:center;box-shadow:8px 8px 16px var(--shadow-dark),-8px -8px 16px var(--shadow-light);transition:opacity .4s}
@@ -98,7 +100,7 @@ body{position:fixed;inset:0;display:grid;place-items:center}
     <span id="dbg" style="font-size:11px;color:var(--muted)"></span>
   </div>
 </div>
-<div id="ckpt" title="v0.3.0 neuromorphic canvas, local clip, loop, audio">#ckpt-loopereel-"v0.3.0 • neuromorphic canvas, local clip, loop, audio"</div>
+<div id="ckpt" title="v0.3.1 portrait 9:16 layout">#ckpt-loopereel-"v0.3.1 • portrait 9:16 layout"</div>
 <script>
 const video=document.getElementById("clip");
 const loader=document.getElementById("loader");
