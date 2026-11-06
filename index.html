@@ -20,7 +20,8 @@ html,body{height:100%;background:radial-gradient(1200px 800px at 30% 20%,#f3f6fb
 body{position:fixed;inset:0;display:grid;place-items:center}
 .canvas{position:relative;width:min(96vw,420px);height:min(96vh,748px);aspect-ratio:9/16;border-radius:40px;background:var(--card);box-shadow:22px 22px 44px var(--shadow-dark),-22px -22px 44px var(--shadow-light);padding:0;overflow:hidden}
 .phone-wrap{height:100%}
-.phone{position:relative;width:100%;height:100%;border-radius:40px;overflow:hidden;background:#000;box-shadow:inset 12px 12px 26px rgba(0,0,0,.4),inset -10px -10px 22px rgba(255,255,255,.06)}
+.phone{position:relative;width:100%;height:calc(100% - 76px);border-radius:34px;overflow:hidden;background:#000;box-shadow:20px 20px 40px var(--shadow-dark),-20px -20px 40px var(--shadow-light),inset 10px 10px 22px rgba(0,0,0,.32),inset -8px -8px 18px rgba(255,255,255,.06)}
+.toolbar{position:absolute;left:50%;bottom:8px;transform:translateX(-50%);display:flex;gap:8px;justify-content:center;align-items:center;flex-wrap:wrap;z-index:4;max-width:96%;pointer-events:auto}
 #clip{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#000}
 .grad{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,.35) 0,transparent 24%,transparent 60%,rgba(0,0,0,.78) 100%)}
 .topbar{position:absolute;top:12px;left:14px;right:14px;display:flex;justify-content:space-between;align-items:center;z-index:3;pointer-events:none;color:#fff}
@@ -84,23 +85,17 @@ body{position:fixed;inset:0;display:grid;place-items:center}
       <div class="loader" id="loader"><div><div>Loading clip</div><div class="progress"><div class="bar" id="bar"></div></div></div></div>
     </div>
   </div>
-  <div class="side">
-    <button class="nbtn" id="playBtn" title="Play / Pause"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
-    <span class="ncount" id="playCount">Play</span>
-    <button class="nbtn" id="muteBtn" title="Mute"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4z"/></svg></button>
-    <span class="ncount" id="muteLabel">Sound</span>
-    <button class="nbtn" id="loopBtn" title="Loop"><svg viewBox="0 0 24 24"><path d="M7 7h10v3l4-4-4-4v3H6a4 4 0 0 0-4 4v2h2V9a2 2 0 0 1 2-2zm10 10H7v-3l-4 4 4 4v-3h11a4 4 0 0 0 4-4v-2h-2v2a2 2 0 0 1-2 2z"/></svg></button>
-    <span class="ncount">Loop</span>
-    <button class="nbtn" id="saveBtn" title="Download clip"><svg viewBox="0 0 24 24"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 21h14"/></svg></button>
-    <span class="ncount">Save</span>
-  </div>
   <div class="toolbar">
-    <button class="tbtn" id="downloadLink">Download clip.mp4</button>
-    <button class="tbtn" id="reloadBtn">Reload clip</button>
+    <button class="nbtn" id="playBtn" title="Play / Pause"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
+    <button class="nbtn" id="muteBtn" title="Sound"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4z"/></svg></button>
+    <button class="nbtn" id="loopBtn" title="Loop"><svg viewBox="0 0 24 24"><path d="M7 7h10v3l4-4-4-4v3H6a4 4 0 0 0-4 4v2h2V9a2 2 0 0 1 2-2zm10 10H7v-3l-4 4 4 4v-3h11a4 4 0 0 0 4-4v-2h-2v2a2 2 0 0 1-2 2z"/></svg></button>
+    <button class="nbtn" id="saveBtn" title="Save"><svg viewBox="0 0 24 24"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 21h14"/></svg></button>
+    <button class="tbtn" id="downloadLink">Download</button>
+    <button class="tbtn" id="reloadBtn">Reload</button>
     <span id="dbg" style="font-size:11px;color:var(--muted)"></span>
   </div>
 </div>
-<div id="ckpt" title="v0.3.1 portrait 9:16 layout">#ckpt-loopereel-"v0.3.1 • portrait 9:16 layout"</div>
+<div id="ckpt" title="v0.3.2 controls outside video, raised video">#ckpt-loopereel-"v0.3.2 • controls outside video, raised video"</div>
 <script>
 const video=document.getElementById("clip");
 const loader=document.getElementById("loader");
