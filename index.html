@@ -10,43 +10,37 @@
 html,body{height:100%;background:#000;color:#fff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;overflow:hidden}
 body{position:fixed;inset:0}
 .stage{position:fixed;inset:0;background:#000}
-#clip{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#000}
+#clip{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000}
 .grad{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,.35) 0,transparent 22%,transparent 62%,rgba(0,0,0,.72) 100%)}
 .top{position:absolute;top:calc(12px+env(safe-area-inset-top));left:14px;right:14px;display:flex;justify-content:space-between;align-items:center;gap:10px;z-index:3;pointer-events:none}
 .brand{display:flex;align-items:center;gap:8px;font-weight:700;letter-spacing:.5px;font-size:14px;opacity:.9}
 .dot{width:9px;height:9px;border-radius:50%;background:#F97316;box-shadow:0 0 12px #F97316}
-.pill{pointer-events:auto;background:rgba(255,255,255,.12);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.16);color:#fff;border-radius:999px;padding:6px 12px;font-size:12px}
+.pill{pointer-events:auto;background:rgba(255,255,255,.12);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.16);color:#fff;border-radius:999px;padding:6px 12px;font-size:12px;cursor:pointer}
 .bottom{position:absolute;left:14px;right:82px;bottom:calc(80px+env(safe-area-inset-bottom));z-index:3;pointer-events:none}
 .handle{font-weight:700;font-size:15px;margin-bottom:4px}
 .caption{font-size:13px;line-height:1.35;opacity:.92;margin-bottom:8px}
 .soundline{display:flex;align-items:center;gap:8px;font-size:12px;opacity:.75}
 .disc{width:14px;height:14px;border-radius:50%;background:#F97316}
-.rail{position:absolute;right:12px;bottom:calc(90px+env(safe-area-inset-bottom));display:flex;flex-direction:column;align-items:center;gap:18px;z-index:3}
+.rail{position:absolute;right:12px;bottom:calc(90px+env(safe-area-inset-bottom));display:flex;flex-direction:column;align-items:center;gap:18px;z-index:3;pointer-events:none}
 .btn{pointer-events:auto;width:46px;height:46px;border-radius:50%;border:none;background:rgba(255,255,255,.14);backdrop-filter:blur(8px);color:#fff;display:grid;place-items:center;cursor:pointer}
 .btn svg{width:22px;height:22px;fill:currentColor}
 .label{font-size:11px;margin-top:4px;opacity:.9}
 .avatar{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,#F97316,#7c2d12);border:2px solid #fff;display:grid;place-items:center;font-weight:800}
-.soundbtn{position:absolute;right:14px;bottom:calc(120px+env(safe-area-inset-bottom));width:52px;height:52px;border-radius:50%;border:2px solid rgba(255,255,255,.25);background:rgba(0,0,0,.4);backdrop-filter:blur(8px);color:#fff;pointer-events:auto;cursor:pointer;display:grid;place-items:center;overflow:hidden}
-.rotor{position:absolute;inset:6px;border-radius:50%;background:conic-gradient(#F97316,#fff,#F97316);animation:spin 6s linear infinite;opacity:.85}
-.soundbtn span{position:relative;z-index:2;font-size:18px}
-@keyframes spin{to{transform:rotate(360deg)}}
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);display:grid;place-items:center;z-index:5;backdrop-filter:blur(2px)}
-.overlay.hidden{display:none}
-.playcard{background:rgba(20,20,20,.88);border:1px solid rgba(255,255,255,.15);border-radius:18px;padding:24px 28px;text-align:center;max-width:min(90vw,320px)}
-.playcard h2{font-size:18px;margin-bottom:8px}
-.playcard p{font-size:13px;opacity:.75;margin-bottom:16px}
-.playbtn{background:#F97316;color:#1A0F02;border:none;border-radius:999px;padding:11px 18px;font-weight:800;cursor:pointer;font-size:14px}
+.hint{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:4;pointer-events:none;background:rgba(0,0,0,.6);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.16);border-radius:14px;padding:14px 18px;text-align:center;opacity:.92;transition:opacity .4s}
+.hint h2{font-size:16px;margin-bottom:4px}
+.hint p{font-size:12px;opacity:.75}
+.hint.hide{opacity:0}
 #ckpt{position:fixed;right:12px;bottom:calc(12px+env(safe-area-inset-bottom));background:#F97316;color:#1A0F02;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;line-height:1.4;padding:6px 10px;border-radius:6px;z-index:9999;max-width:min(70vw,420px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;opacity:.9;pointer-events:auto;cursor:default}
 @media (max-width:420px){.bottom{right:70px}.rail{gap:14px}}
 </style>
 </head>
 <body>
 <div class="stage">
-  <video id="clip" loop playsinline preload="auto"></video>
+  <iframe id="clip" src="https://drive.google.com/file/d/1dwV7ZNNVTunHewwDTSPkIcE1X1eXMi_G/preview?autoplay=1" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" referrerpolicy="origin"></iframe>
   <div class="grad"></div>
   <div class="top">
     <div class="brand"><span class="dot"></span>Loopereel</div>
-    <button class="pill" id="source">HD</button>
+    <button class="pill" id="source">Source</button>
   </div>
   <div class="rail">
     <div><div class="avatar">R</div><div class="label">You</div></div>
@@ -55,43 +49,16 @@ body{position:fixed;inset:0}
   </div>
   <div class="bottom">
     <div class="handle">@loopereel</div>
-    <div class="caption">Comp 1 • looping study. Original audio. Auto plays on open.</div>
+    <div class="caption">Comp 1 • looping study. Audio on. Tap play if needed.</div>
     <div class="soundline"><span class="disc"></span>Original sound — Loopereel</div>
   </div>
-  <button class="soundbtn" id="sound" aria-label="sound"><span class="rotor"></span><span id="soundIcon">♪</span></button>
+  <div class="hint" id="hint"><h2>Tap video to play</h2><p>Browser autoplay may need a tap</p></div>
 </div>
-<div class="overlay" id="overlay">
-  <div class="playcard">
-    <h2>Tap to start</h2>
-    <p>Browser blocks autoplay with sound. Tap below to play with audio.</p>
-    <button class="playbtn" id="playbtn">Play with sound</button>
-  </div>
-</div>
-<div id="ckpt" title="v0.1.0 add reel ui, autoplay loop, sound">#ckpt-loopereel-"v0.1.0 • add reel ui, autoplay loop, sound"</div>
+<div id="ckpt" title="v0.2.0 add drive preview iframe, keep reel ui">#ckpt-loopereel-"v0.2.0 • add drive preview iframe, keep reel ui"</div>
 <script>
-const SRC="https://drive.google.com/uc?export=download&id=1dwV7ZNNVTunHewwDTSPkIcE1X1eXMi_G";
-const video=document.getElementById("clip");
-const overlay=document.getElementById("overlay");
-const soundBtn=document.getElementById("sound");
-const soundIcon=document.getElementById("soundIcon");
-video.src=SRC;
-video.loop=true;
-video.autoplay=true;
-video.preload="auto";
-video.muted=false;
-let playing=false;
-async function tryPlay(muted=video.muted){
-  video.muted=muted;
-  try{await video.play();playing=true;overlay.classList.add("hidden");return true;}
-  catch(e){playing=false;overlay.classList.remove("hidden");return false;}
-}
-video.addEventListener("loadedmetadata",()=>tryPlay(false));
-soundBtn.addEventListener("click",async(e)=>{e.stopPropagation();video.muted=!video.muted;soundIcon.textContent=video.muted?"🔇":"♪";await tryPlay(video.muted);});
-document.getElementById("playbtn").addEventListener("click",async()=>{const ok=await tryPlay(false);if(ok){soundIcon.textContent="♪";}});
-window.addEventListener("click",()=>{if(!playing)tryPlay(false);},{once:true});
-document.getElementById("like").addEventListener("click",()=>{});
-document.getElementById("share").addEventListener("click",()=>{if(navigator.share)navigator.share({title:"Loopereel",url:location.href});});
+setTimeout(()=>document.getElementById("hint").classList.add("hide"),4000);
 document.getElementById("source").addEventListener("click",()=>window.open("https://drive.google.com/file/d/1dwV7ZNNVTunHewwDTSPkIcE1X1eXMi_G/preview","_blank"));
+document.getElementById("share").addEventListener("click",()=>{if(navigator.share)navigator.share({title:"Loopereel",url:location.href});});
 </script>
 </body>
 </html>
